@@ -100,7 +100,39 @@ class MyApp extends StatelessWidget {
                     ),
                 ),
 
+                SizedBox(height: 16),
+
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 64),
+                  child: Container(
+                    height: 48,
+                    decoration: BoxDecoration(
+                      color: Colors.lightBlueAccent[200],
+                      border: Border.all(color: Colors.white, width: 1.0),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+
+                  child: TextButton(
+                    onPressed: () {
+                      // Lógica para lidar com o clique em "Esqueceu sua senha?"
+                    },
+                    child: const Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Entrar',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+
+                        ),
+                      ),
+                    ),
+                  ),
+                  ),
+                ),
+
                 SizedBox(height: 32),
+
                 Text(
                   'Você é novo aqui?',
                   style: TextStyle(color: Colors.black),
