@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'main.dart';
+import 'tela_pneus.dart';
+import 'tela_freios.dart';
 
 class TelaProdutos extends StatefulWidget {
   @override
@@ -65,346 +67,323 @@ class _TelaProdutosState extends State<TelaProdutos> {
                               child: Container(
                                 height: 90,
                                 decoration: BoxDecoration(
-                                  color: Colors.grey[400],
+                                  color: Colors.grey[300],
                                   border: Border.all(
                                     color: Colors.black,
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(15),
                                 ),
-                                child: TextButton(
-                                  onPressed: () {
-                                    Navigator.of(TelaPrincipalContext).push(
-                                      PageRouteBuilder(
-                                        pageBuilder: (context, animation, secondaryAnimation) {
-                                          return TelaInicial();
-                                        },
-                                        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                          const begin = Offset(1.0, 0.0);
-                                          const end = Offset.zero;
-                                          const curve = Curves.easeInOut;
-
-                                          var tween = Tween(begin: begin, end: end).chain(
-                                            CurveTween(curve: curve),
-                                          );
-
-                                          var offsetAnimation = animation.drive(tween);
-
-                                          return SlideTransition(
-                                            position: offsetAnimation,
-                                            child: child,
-                                          );
-                                        },
-                                      ),
-                                    );
-                                  },
-                                  child: Row( // Usar um Row para combinar a imagem e o texto horizontalmente
-                                    mainAxisAlignment: MainAxisAlignment.center, // Alinhar os elementos ao centro
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(right: 8), // Espaço entre a imagem e o texto
-                                        child: Image.asset(
-                                          'assets/images/Pneu.png',
-                                          width: 120, // Defina a largura da imagem conforme necessário
-                                          height: 80, // Defina a altura da imagem conforme necessário
-                                        ),
-                                      ),
-                                      Text(
-                                        'Pneu',
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 28,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 20),
-
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 64),
-                              child: Container(
-                                height: 90,
-                                decoration: BoxDecoration(
-                                  color: Colors.grey[400],
-                                  border: Border.all(
-                                      color: Colors.black, width: 1.0),
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                                child: TextButton(
-                                  onPressed: () {
-                                    Navigator.of(TelaPrincipalContext).push(
-                                      PageRouteBuilder(
-                                        pageBuilder: (context, animation,
-                                            secondaryAnimation) {
-                                          return TelaInicial();
-                                        },
-                                        transitionsBuilder: (context, animation,
-                                            secondaryAnimation, child) {
-                                          const begin = Offset(1.0, 0.0);
-                                          const end = Offset.zero;
-                                          const curve = Curves.easeInOut;
-
-                                          var tween =
-                                              Tween(begin: begin, end: end)
-                                                  .chain(
-                                            CurveTween(curve: curve),
-                                          );
-
-                                          var offsetAnimation =
-                                              animation.drive(tween);
-
-                                          return SlideTransition(
-                                            position: offsetAnimation,
-                                            child: child,
-                                          );
-                                        },
-                                      ),
-                                    );
-                                  },
-                                  child: const Align(
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      'Freios',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 28,
+                                child: Stack(
+                                  children: [
+                                    Positioned(
+                                      left: 0,
+                                      child: Image.asset(
+                                        'assets/images/Pneu.png',
+                                        width: 120,
+                                        height: 90,
                                       ),
                                     ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 20),
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 64),
-                              child: Container(
-                                height: 90,
-                                decoration: BoxDecoration(
-                                  color: Colors.grey[400],
-                                  border: Border.all(
-                                      color: Colors.black, width: 1.0),
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                                child: TextButton(
-                                  onPressed: () {
-                                    Navigator.of(TelaPrincipalContext).push(
-                                      PageRouteBuilder(
-                                        pageBuilder: (context, animation,
-                                            secondaryAnimation) {
-                                          return TelaInicial();
-                                        },
-                                        transitionsBuilder: (context, animation,
-                                            secondaryAnimation, child) {
-                                          const begin = Offset(1.0, 0.0);
-                                          const end = Offset.zero;
-                                          const curve = Curves.easeInOut;
+                                    Center(
+                                      child: TextButton(
+                                        onPressed: () {
+                                          Navigator.of(TelaPrincipalContext).push(
+                                            PageRouteBuilder(
+                                              pageBuilder: (context, animation, secondaryAnimation) {
+                                                return TelaPneus();
+                                              },
+                                              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                                const begin = Offset(1.0, 0.0);
+                                                const end = Offset.zero;
+                                                const curve = Curves.easeInOut;
 
-                                          var tween =
-                                              Tween(begin: begin, end: end)
-                                                  .chain(
-                                            CurveTween(curve: curve),
-                                          );
+                                                var tween = Tween(begin: begin, end: end).chain(
+                                                  CurveTween(curve: curve),
+                                                );
 
-                                          var offsetAnimation =
-                                              animation.drive(tween);
+                                                var offsetAnimation = animation.drive(tween);
 
-                                          return SlideTransition(
-                                            position: offsetAnimation,
-                                            child: child,
+                                                return SlideTransition(
+                                                  position: offsetAnimation,
+                                                  child: child,
+                                                );
+                                              },
+                                            ),
                                           );
                                         },
-                                      ),
-                                    );
-                                  },
-                                  child: const Align(
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      'Luzes',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 28,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 20),
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 64),
-                              child: Container(
-                                height: 90,
-                                decoration: BoxDecoration(
-                                  color: Colors.grey[400],
-                                  border: Border.all(
-                                      color: Colors.black, width: 1.0),
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                                child: TextButton(
-                                  onPressed: () {
-                                    Navigator.of(TelaPrincipalContext).push(
-                                      PageRouteBuilder(
-                                        pageBuilder: (context, animation,
-                                            secondaryAnimation) {
-                                          return TelaInicial();
-                                        },
-                                        transitionsBuilder: (context, animation,
-                                            secondaryAnimation, child) {
-                                          const begin = Offset(1.0, 0.0);
-                                          const end = Offset.zero;
-                                          const curve = Curves.easeInOut;
-
-                                          var tween =
-                                              Tween(begin: begin, end: end)
-                                                  .chain(
-                                            CurveTween(curve: curve),
-                                          );
-
-                                          var offsetAnimation =
-                                              animation.drive(tween);
-
-                                          return SlideTransition(
-                                            position: offsetAnimation,
-                                            child: child,
-                                          );
-                                        },
-                                      ),
-                                    );
-                                  },
-                                  child: const Align(
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      'Velas',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 28,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 20),
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 64),
-                              // Espaço de 64 pixels nas bordas esquerda e direita
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                // Para distribuir os botões igualmente nas extremidades
-                                children: [
-                                  Container(
-                                    height: 48,
-                                    width: 200,
-                                    decoration: BoxDecoration(
-                                      color: Colors.grey[300],
-                                      border: Border.all(
-                                          color: Colors.black, width: 1.0),
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    child: TextButton(
-                                      onPressed: () {
-                                        Navigator.of(TelaPrincipalContext).push(
-                                          PageRouteBuilder(
-                                            pageBuilder: (context, animation,
-                                                secondaryAnimation) {
-                                              return TelaInicial();
-                                            },
-                                            transitionsBuilder: (context,
-                                                animation,
-                                                secondaryAnimation,
-                                                child) {
-                                              const begin = Offset(-1.0, 0.0);
-                                              const end = Offset.zero;
-                                              const curve = Curves.easeInOut;
-
-                                              var tween =
-                                                  Tween(begin: begin, end: end)
-                                                      .chain(
-                                                CurveTween(curve: curve),
-                                              );
-
-                                              var offsetAnimation =
-                                                  animation.drive(tween);
-
-                                              return SlideTransition(
-                                                position: offsetAnimation,
-                                                child: child,
-                                              );
-                                            },
+                                        child: const Align(
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            'Pneus',
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 34,
+                                              fontWeight: FontWeight.bold,
+                                            ),
                                           ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+
+                            SizedBox(height: 20),
+
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 64),
+                              child: Container(
+                                height: 90,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[300],
+                                  border: Border.all(
+                                    color: Colors.black,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: Stack(
+                                  children: [
+                                    Positioned(
+                                      left: 0,
+                                      child: Image.asset(
+                                        'assets/images/Freios.png',
+                                        width: 90,
+                                        height: 80,
+                                      ),
+                                    ),
+                                    Center(
+                                      child: TextButton(
+                                        onPressed: () {
+                                          Navigator.of(TelaPrincipalContext).push(
+                                            PageRouteBuilder(
+                                              pageBuilder: (context, animation, secondaryAnimation) {
+                                                return TelaFreios();
+                                              },
+                                              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                                const begin = Offset(1.0, 0.0);
+                                                const end = Offset.zero;
+                                                const curve = Curves.easeInOut;
+
+                                                var tween = Tween(begin: begin, end: end).chain(
+                                                  CurveTween(curve: curve),
+                                                );
+
+                                                var offsetAnimation = animation.drive(tween);
+
+                                                return SlideTransition(
+                                                  position: offsetAnimation,
+                                                  child: child,
+                                                );
+                                              },
+                                            ),
+                                          );
+                                        },
+                                        child: const Align(
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            'Freios',
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 34,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 20),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 64),
+                              child: Container(
+                                height: 90,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[300],
+                                  border: Border.all(
+                                    color: Colors.black,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: Stack(
+                                  children: [
+                                    Positioned(
+                                      left: 0,
+                                      child: Image.asset(
+                                        'assets/images/Luzes.png',
+                                        width: 100,
+                                        height: 80,
+                                      ),
+                                    ),
+                                    Center(
+                                      child: TextButton(
+                                        onPressed: () {
+                                          Navigator.of(TelaPrincipalContext).push(
+                                            PageRouteBuilder(
+                                              pageBuilder: (context, animation, secondaryAnimation) {
+                                                return TelaInicial();
+                                              },
+                                              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                                const begin = Offset(1.0, 0.0);
+                                                const end = Offset.zero;
+                                                const curve = Curves.easeInOut;
+
+                                                var tween = Tween(begin: begin, end: end).chain(
+                                                  CurveTween(curve: curve),
+                                                );
+
+                                                var offsetAnimation = animation.drive(tween);
+
+                                                return SlideTransition(
+                                                  position: offsetAnimation,
+                                                  child: child,
+                                                );
+                                              },
+                                            ),
+                                          );
+                                        },
+                                        child: const Align(
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            'Luzes',
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 34,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 20),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 64),
+                              child: Container(
+                                height: 90,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[300],
+                                  border: Border.all(
+                                    color: Colors.black,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: Stack(
+                                  children: [
+                                    Positioned(
+                                      left: 0,
+                                      child: Image.asset(
+                                        'assets/images/Velas.png',
+                                        width: 100,
+                                        height: 80,
+                                      ),
+                                    ),
+                                    Center(
+                                      child: TextButton(
+                                        onPressed: () {
+                                          Navigator.of(TelaPrincipalContext).push(
+                                            PageRouteBuilder(
+                                              pageBuilder: (context, animation, secondaryAnimation) {
+                                                return TelaInicial();
+                                              },
+                                              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                                const begin = Offset(1.0, 0.0);
+                                                const end = Offset.zero;
+                                                const curve = Curves.easeInOut;
+
+                                                var tween = Tween(begin: begin, end: end).chain(
+                                                  CurveTween(curve: curve),
+                                                );
+
+                                                var offsetAnimation = animation.drive(tween);
+
+                                                return SlideTransition(
+                                                  position: offsetAnimation,
+                                                  child: child,
+                                                );
+                                              },
+                                            ),
+                                          );
+                                        },
+                                        child: const Align(
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            'Velas',
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 34,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 40),
+                            Container(
+                              height: 48,
+                              width: 200,
+                              decoration: BoxDecoration(
+                                color: Colors.lightBlueAccent[200],
+                                border: Border.all(
+                                    color: Colors.transparent, width: 1.0),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.of(TelaPrincipalContext).push(
+                                    PageRouteBuilder(
+                                      pageBuilder: (context, animation,
+                                          secondaryAnimation) {
+                                        return TelaInicial();
+                                      },
+                                      transitionsBuilder: (context,
+                                          animation,
+                                          secondaryAnimation,
+                                          child) {
+                                        const begin = Offset(-1.0, 0.0);
+                                        const end = Offset.zero;
+                                        const curve = Curves.easeInOut;
+
+                                        var tween =
+                                        Tween(begin: begin, end: end)
+                                            .chain(
+                                          CurveTween(curve: curve),
+                                        );
+
+                                        var offsetAnimation =
+                                        animation.drive(tween);
+
+                                        return SlideTransition(
+                                          position: offsetAnimation,
+                                          child: child,
                                         );
                                       },
-                                      child: const Align(
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                          'Voltar',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
+                                    ),
+                                  );
+                                },
+                                child: const Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    'Voltar',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
                                     ),
                                   ),
-                                  Container(
-                                    height: 48,
-                                    width: 200,
-                                    decoration: BoxDecoration(
-                                      color: Colors.lightBlueAccent[200],
-                                      border: Border.all(
-                                          color: Colors.white, width: 1.0),
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    child: TextButton(
-                                      onPressed: () {
-                                        Navigator.of(TelaPrincipalContext).push(
-                                          PageRouteBuilder(
-                                            pageBuilder: (context, animation,
-                                                secondaryAnimation) {
-                                              return TelaInicial();
-                                            },
-                                            transitionsBuilder: (context,
-                                                animation,
-                                                secondaryAnimation,
-                                                child) {
-                                              const begin = Offset(-1.0, 0.0);
-                                              const end = Offset.zero;
-                                              const curve = Curves.easeInOut;
-
-                                              var tween =
-                                                  Tween(begin: begin, end: end)
-                                                      .chain(
-                                                CurveTween(curve: curve),
-                                              );
-
-                                              var offsetAnimation =
-                                                  animation.drive(tween);
-
-                                              return SlideTransition(
-                                                position: offsetAnimation,
-                                                child: child,
-                                              );
-                                            },
-                                          ),
-                                        );
-                                      },
-                                      child: const Align(
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                          'Crie sua conta!',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
                             ),
                           ],
