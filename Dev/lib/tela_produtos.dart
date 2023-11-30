@@ -1,20 +1,82 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'main.dart';
 import 'tela_pneus.dart';
 import 'tela_freios.dart';
 
 class TelaProdutos extends StatefulWidget {
+  final int? userId;
+  TelaProdutos({Key? key, required this.userId}) : super(key: key);
   @override
   _TelaProdutosState createState() => _TelaProdutosState();
 }
 
 class _TelaProdutosState extends State<TelaProdutos> {
-  bool isChecked = false;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
+
   Widget build(BuildContext TelaPrincipalContext) {
     return MaterialApp(
       home: Scaffold(
+        key: _scaffoldKey,
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.lightBlueAccent,
+                ),
+                child: Text(
+                  'Olá, motorista!',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                  ),
+                ),
+              ),
+              ListTile(
+                title: Text('Pneus'),
+                onTap: () {
+                  Navigator.of(context).push(
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) {
+                        return TelaPneus(userId: widget.userId);
+                      },
+                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                        const begin = Offset(1.0, 0.0);
+                        const end = Offset.zero;
+                        const curve = Curves.easeInOut;
+
+                        var tween = Tween(begin: begin, end: end).chain(
+                          CurveTween(curve: curve),
+                        );
+
+                        var offsetAnimation = animation.drive(tween);
+
+                        return SlideTransition(
+                          position: offsetAnimation,
+                          child: child,
+                        );
+                      },
+                    ),
+                  );
+                },
+              ),
+              ListTile(
+                title: Text('Freios'),
+                onTap: () {
+                  Navigator.of(TelaPrincipalContext).push(
+                    MaterialPageRoute(builder: (context) => TelaFreios()),
+                  );
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+        ),
         body: Stack(
           children: <Widget>[
             Container(
@@ -23,6 +85,27 @@ class _TelaProdutosState extends State<TelaProdutos> {
                   colors: [Colors.lightBlueAccent, Colors.white],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
+                ),
+              ),
+            ),
+            Positioned(
+              top: 16,
+              left: 16,
+              child: InkWell(
+                onTap: () {
+                  _scaffoldKey.currentState!.openDrawer();
+                },
+                child: Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                  ),
+                  child: Image.asset(
+                    'assets/images/hamburger_icon.png',
+                    width: 50,
+                    height: 50,
+                  ),
                 ),
               ),
             ),
@@ -87,21 +170,30 @@ class _TelaProdutosState extends State<TelaProdutos> {
                                     Center(
                                       child: TextButton(
                                         onPressed: () {
-                                          Navigator.of(TelaPrincipalContext).push(
+                                          print(widget.userId);
+                                          Navigator.of(TelaPrincipalContext)
+                                              .push(
                                             PageRouteBuilder(
-                                              pageBuilder: (context, animation, secondaryAnimation) {
-                                                return TelaPneus();
+                                              pageBuilder: (context, animation,
+                                                  secondaryAnimation) {
+                                                return TelaPneus(userId: widget.userId);
                                               },
-                                              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                              transitionsBuilder: (context,
+                                                  animation,
+                                                  secondaryAnimation,
+                                                  child) {
                                                 const begin = Offset(1.0, 0.0);
                                                 const end = Offset.zero;
                                                 const curve = Curves.easeInOut;
 
-                                                var tween = Tween(begin: begin, end: end).chain(
+                                                var tween = Tween(
+                                                    begin: begin, end: end)
+                                                    .chain(
                                                   CurveTween(curve: curve),
                                                 );
 
-                                                var offsetAnimation = animation.drive(tween);
+                                                var offsetAnimation =
+                                                animation.drive(tween);
 
                                                 return SlideTransition(
                                                   position: offsetAnimation,
@@ -128,9 +220,7 @@ class _TelaProdutosState extends State<TelaProdutos> {
                                 ),
                               ),
                             ),
-
                             SizedBox(height: 20),
-
                             Padding(
                               padding: EdgeInsets.symmetric(horizontal: 64),
                               child: Container(
@@ -156,21 +246,29 @@ class _TelaProdutosState extends State<TelaProdutos> {
                                     Center(
                                       child: TextButton(
                                         onPressed: () {
-                                          Navigator.of(TelaPrincipalContext).push(
+                                          Navigator.of(TelaPrincipalContext)
+                                              .push(
                                             PageRouteBuilder(
-                                              pageBuilder: (context, animation, secondaryAnimation) {
+                                              pageBuilder: (context, animation,
+                                                  secondaryAnimation) {
                                                 return TelaFreios();
                                               },
-                                              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                              transitionsBuilder: (context,
+                                                  animation,
+                                                  secondaryAnimation,
+                                                  child) {
                                                 const begin = Offset(1.0, 0.0);
                                                 const end = Offset.zero;
                                                 const curve = Curves.easeInOut;
 
-                                                var tween = Tween(begin: begin, end: end).chain(
+                                                var tween = Tween(
+                                                    begin: begin, end: end)
+                                                    .chain(
                                                   CurveTween(curve: curve),
                                                 );
 
-                                                var offsetAnimation = animation.drive(tween);
+                                                var offsetAnimation =
+                                                animation.drive(tween);
 
                                                 return SlideTransition(
                                                   position: offsetAnimation,
@@ -223,21 +321,29 @@ class _TelaProdutosState extends State<TelaProdutos> {
                                     Center(
                                       child: TextButton(
                                         onPressed: () {
-                                          Navigator.of(TelaPrincipalContext).push(
+                                          Navigator.of(TelaPrincipalContext)
+                                              .push(
                                             PageRouteBuilder(
-                                              pageBuilder: (context, animation, secondaryAnimation) {
+                                              pageBuilder: (context, animation,
+                                                  secondaryAnimation) {
                                                 return TelaInicial();
                                               },
-                                              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                              transitionsBuilder: (context,
+                                                  animation,
+                                                  secondaryAnimation,
+                                                  child) {
                                                 const begin = Offset(1.0, 0.0);
                                                 const end = Offset.zero;
                                                 const curve = Curves.easeInOut;
 
-                                                var tween = Tween(begin: begin, end: end).chain(
+                                                var tween = Tween(
+                                                    begin: begin, end: end)
+                                                    .chain(
                                                   CurveTween(curve: curve),
                                                 );
 
-                                                var offsetAnimation = animation.drive(tween);
+                                                var offsetAnimation =
+                                                animation.drive(tween);
 
                                                 return SlideTransition(
                                                   position: offsetAnimation,
@@ -290,21 +396,29 @@ class _TelaProdutosState extends State<TelaProdutos> {
                                     Center(
                                       child: TextButton(
                                         onPressed: () {
-                                          Navigator.of(TelaPrincipalContext).push(
+                                          Navigator.of(TelaPrincipalContext)
+                                              .push(
                                             PageRouteBuilder(
-                                              pageBuilder: (context, animation, secondaryAnimation) {
+                                              pageBuilder: (context, animation,
+                                                  secondaryAnimation) {
                                                 return TelaInicial();
                                               },
-                                              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                              transitionsBuilder: (context,
+                                                  animation,
+                                                  secondaryAnimation,
+                                                  child) {
                                                 const begin = Offset(1.0, 0.0);
                                                 const end = Offset.zero;
                                                 const curve = Curves.easeInOut;
 
-                                                var tween = Tween(begin: begin, end: end).chain(
+                                                var tween = Tween(
+                                                    begin: begin, end: end)
+                                                    .chain(
                                                   CurveTween(curve: curve),
                                                 );
 
-                                                var offsetAnimation = animation.drive(tween);
+                                                var offsetAnimation =
+                                                animation.drive(tween);
 
                                                 return SlideTransition(
                                                   position: offsetAnimation,
@@ -349,17 +463,14 @@ class _TelaProdutosState extends State<TelaProdutos> {
                                           secondaryAnimation) {
                                         return TelaInicial();
                                       },
-                                      transitionsBuilder: (context,
-                                          animation,
-                                          secondaryAnimation,
-                                          child) {
+                                      transitionsBuilder: (context, animation,
+                                          secondaryAnimation, child) {
                                         const begin = Offset(-1.0, 0.0);
                                         const end = Offset.zero;
                                         const curve = Curves.easeInOut;
 
                                         var tween =
-                                        Tween(begin: begin, end: end)
-                                            .chain(
+                                        Tween(begin: begin, end: end).chain(
                                           CurveTween(curve: curve),
                                         );
 

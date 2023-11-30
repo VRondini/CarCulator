@@ -6,8 +6,9 @@ import 'main.dart';
 
 class TelaResultado extends StatelessWidget {
   final double resultado;
+  final int? userId;
 
-  TelaResultado(this.resultado);
+  TelaResultado(this.resultado, {Key? key, this.userId}) : super(key: key);
 
   @override
   Widget build(BuildContext TelaPrincipalContext) {
@@ -271,7 +272,7 @@ class TelaResultado extends StatelessWidget {
                                             PageRouteBuilder(
                                               pageBuilder: (context, animation,
                                                   secondaryAnimation) {
-                                                return TelaPneus();
+                                                return TelaPneus(userId: userId);
                                               },
                                               transitionsBuilder: (context,
                                                   animation,
@@ -326,7 +327,7 @@ class TelaResultado extends StatelessWidget {
                                             PageRouteBuilder(
                                               pageBuilder: (context, animation,
                                                   secondaryAnimation) {
-                                                return TelaProdutos();
+                                                return TelaProdutos(userId: userId);
                                               },
                                               transitionsBuilder: (context,
                                                   animation,
@@ -410,7 +411,7 @@ class TelaResultado extends StatelessWidget {
                                     child: const Align(
                                       alignment: Alignment.center,
                                       child: Text(
-                                        'Voltar a tela inicial',
+                                        'Sair',
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 16,

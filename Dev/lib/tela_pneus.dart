@@ -3,13 +3,52 @@ import 'package:projetocarculator/tela_resultados.dart';
 import 'calculo_pneu.dart';
 import 'tela_produtos.dart';
 import 'tela_resultados.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class TelaPneus extends StatefulWidget {
+  final int? userId;
+  TelaPneus({Key? key, this.userId}) : super(key: key);
+
   @override
   _TelaPneusState createState() => _TelaPneusState();
 }
 
 class _TelaPneusState extends State<TelaPneus> {
+  Future<void> inserirHistorico(
+      double massaVeiculo,
+      double velocidadeMedia,
+      double qualidadePneu,
+      double desgasteMaximo,
+      double distanciaPercorrida,
+      double resultado,
+      ) async {
+    final url = 'http://localhost:3000/inserir_historico';
+
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        body: jsonEncode({
+          'massa_veiculo': massaVeiculo,
+          'velocidade_media': velocidadeMedia,
+          'qualidade_pneu': qualidadePneu,
+          'desgaste_maximo': desgasteMaximo,
+          'distancia_percorrida': distanciaPercorrida,
+          'resultado': resultado,
+          'id_usuario': widget.userId,
+        }),
+        headers: {'Content-Type': 'application/json'},
+      );
+
+      if (response.statusCode == 200) {
+        print('Histórico inserido com sucesso');
+      } else {
+        print('Erro ao inserir histórico: ${response.statusCode}');
+      }
+    } catch (exception) {
+      print('Erro ao inserir histórico: $exception');
+    }
+  }
   final CalculoDesgaste calculadora = CalculoDesgaste();
 
   @override
@@ -199,7 +238,6 @@ class _TelaPneusState extends State<TelaPneus> {
 
                                   SizedBox(height: 16),
 
-                                  //Container distancia percorrida
                                   Container(
                                     decoration: BoxDecoration(
                                       color: Colors.grey[200],
@@ -245,7 +283,7 @@ class _TelaPneusState extends State<TelaPneus> {
                                               PageRouteBuilder(
                                                 pageBuilder: (context, animation,
                                                     secondaryAnimation) {
-                                                  return TelaProdutos();
+                                                  return TelaProdutos(userId: widget.userId);
                                                 },
                                                 transitionsBuilder: (context,
                                                     animation,
@@ -295,7 +333,18 @@ class _TelaPneusState extends State<TelaPneus> {
                                         ),
                                         child: TextButton(
                                           onPressed: () async {
+                                            print(widget.userId);
                                             double valorFinal = calculadora.porcentagemVidaUtilRemanescente();
+
+                                            await inserirHistorico(
+                                              calculadora.massa,
+                                              calculadora.aceleracao,
+                                              calculadora.qualidadePneu,
+                                              calculadora.desgasteMaximo,
+                                              calculadora.distanciaPercorrida,
+                                              valorFinal,
+                                            );
+
                                             Navigator.of(context).push(
                                               PageRouteBuilder(
                                                 pageBuilder: (context, animation, secondaryAnimation) {
