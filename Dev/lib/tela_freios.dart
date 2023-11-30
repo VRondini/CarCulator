@@ -3,6 +3,9 @@ import 'calculo_pneu.dart';
 import 'tela_produtos.dart';
 
 class TelaFreios extends StatefulWidget {
+  final int? userId;
+
+  TelaFreios({Key? key, this.userId}) : super(key: key);
   @override
   _TelaFreiosState createState() => _TelaFreiosState();
 }
@@ -226,7 +229,7 @@ class _TelaFreiosState extends State<TelaFreios> {
                                               PageRouteBuilder(
                                                 pageBuilder: (context, animation,
                                                     secondaryAnimation) {
-                                                  return TelaProdutos();
+                                                  return TelaProdutos(userId: widget.userId);
                                                 },
                                                 transitionsBuilder: (context,
                                                     animation,

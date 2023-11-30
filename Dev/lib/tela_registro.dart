@@ -1,11 +1,13 @@
 import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:postgres/postgres.dart';
-import 'package:http/http.dart' as http;
 import 'tela_produtos.dart';
 import 'main.dart';
 
 class TelaRegistro extends StatefulWidget {
+  final int? userId;
+  TelaRegistro({Key? key, required this.userId}) : super(key: key);
   @override
   _TelaRegistroState createState() => _TelaRegistroState();
 }
@@ -328,7 +330,6 @@ class _TelaRegistroState extends State<TelaRegistro> {
                                           onPressed: () {
                                             if (senhaController.text ==
                                                 confirmarSenhaController.text) {
-                                              // Senhas coincidem, continue com o registro.
                                               inserirDados(
                                                 nomeController.text,
                                                 sobrenomeController.text,
@@ -347,7 +348,7 @@ class _TelaRegistroState extends State<TelaRegistro> {
                                                 PageRouteBuilder(
                                                   pageBuilder: (context, animation,
                                                       secondaryAnimation) {
-                                                    return TelaProdutos();
+                                                    return TelaProdutos(userId: widget.userId);
                                                   },
                                                   transitionsBuilder: (
                                                       TelaRegistroContext, animation,

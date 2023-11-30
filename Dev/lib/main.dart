@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'tela_registro.dart';
 import 'tela_produtos.dart';
+import 'tela_pneus.dart';
+import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 void main() {
@@ -18,6 +20,7 @@ class TelaInicial extends StatefulWidget {
 }
 
 class _TelaInicialState extends State<TelaInicial> {
+  int? userId;
   TextEditingController emailController = TextEditingController();
   TextEditingController senhaController = TextEditingController();
 
@@ -37,10 +40,17 @@ class _TelaInicialState extends State<TelaInicial> {
     );
 
     if (response.statusCode == 200) {
+      final Map<String, dynamic> responseData = json.decode(response.body);
+      final int usuarioId = responseData['id_usuario'];
+
+      setState(() {
+        userId = usuarioId;
+      });
+
       Navigator.of(context).push(
         PageRouteBuilder(
           pageBuilder: (context, animation, secondaryAnimation) {
-            return TelaProdutos();
+            return TelaProdutos(userId: userId);
           },
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             const begin = Offset(1.0, 0.0);
@@ -207,7 +217,7 @@ class _TelaInicialState extends State<TelaInicial> {
                       Navigator.of(context).push(
                         PageRouteBuilder(
                           pageBuilder: (context, animation, secondaryAnimation) {
-                            return TelaRegistro();
+                            return TelaRegistro(userId: userId);
                           },
                           transitionsBuilder: (context, animation, secondaryAnimation, child) {
                             const begin = Offset(1.0, 0.0);
