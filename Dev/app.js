@@ -104,6 +104,29 @@ app.post('/inserir_historico', async (req, res) => {
   }
 });
 
+app.get('/historico_usuario', async (req, res) => {
+  console.log('Recebendo solicitação para /historico_usuario');
+  const { id_usuario } = req.query;
+
+  try {
+    const result = await client.query(
+      'SELECT * FROM historico_usuario WHERE id_usuario = $1',
+      [id_usuario]
+    );
+
+    if (result.rows.length > 0) {
+      const historico = result.rows;
+      res.status(200).json({ historico });
+    } else {
+      res.status(404).json({ message: 'Nenhum histórico encontrado para este usuário.' });
+    }
+  } catch (error) {
+    console.error('Erro ao recuperar histórico:', error);
+    res.status(500).json({ error: 'Erro ao recuperar histórico.', details: error.message });
+  }
+});
+
+
 
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);

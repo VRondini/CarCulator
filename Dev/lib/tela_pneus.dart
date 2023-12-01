@@ -348,7 +348,7 @@ class _TelaPneusState extends State<TelaPneus> {
                                             Navigator.of(context).push(
                                               PageRouteBuilder(
                                                 pageBuilder: (context, animation, secondaryAnimation) {
-                                                  return TelaResultado(valorFinal);
+                                                  return TelaResultado(valorFinal, userId: widget.userId);
                                                 },
                                                 transitionsBuilder: (context, animation, secondaryAnimation, child) {
                                                   const begin = Offset(1.0, 0.0);
