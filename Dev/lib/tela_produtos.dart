@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 import 'tela_pneus.dart';
 import 'tela_freios.dart';
+import 'historico.dart';
 
 class TelaProdutos extends StatefulWidget {
   final int? userId;
@@ -27,7 +28,10 @@ class _TelaProdutosState extends State<TelaProdutos> {
             children: <Widget>[
               DrawerHeader(
                 decoration: BoxDecoration(
-                  color: Colors.lightBlueAccent,
+                    image: DecorationImage(
+                      image: AssetImage("assets/images/lancerLandScape.jpg"),
+                      fit: BoxFit.cover,
+                    ),
                 ),
                 child: Text(
                   'Olá, motorista!',
@@ -38,12 +42,12 @@ class _TelaProdutosState extends State<TelaProdutos> {
                 ),
               ),
               ListTile(
-                title: Text('Pneus'),
+                title: Text('Histórico de cálculos'),
                 onTap: () {
                   Navigator.of(context).push(
                     PageRouteBuilder(
                       pageBuilder: (context, animation, secondaryAnimation) {
-                        return TelaPneus(userId: widget.userId);
+                        return TelaHistorico(userId: widget.userId);
                       },
                       transitionsBuilder: (context, animation, secondaryAnimation, child) {
                         const begin = Offset(1.0, 0.0);
@@ -66,12 +70,31 @@ class _TelaProdutosState extends State<TelaProdutos> {
                 },
               ),
               ListTile(
-                title: Text('Freios'),
+                title: Text('Sair'),
                 onTap: () {
-                  Navigator.of(TelaPrincipalContext).push(
-                    MaterialPageRoute(builder: (context) => TelaFreios()),
-                  );
-                  Navigator.pop(context);
+                  Navigator.of(context).push(
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) {
+                      return TelaInicial();
+                    },
+                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                      const begin = Offset(1.0, 0.0);
+                      const end = Offset.zero;
+                      const curve = Curves.easeInOut;
+
+                      var tween = Tween(begin: begin, end: end).chain(
+                        CurveTween(curve: curve),
+                      );
+
+                      var offsetAnimation = animation.drive(tween);
+
+                      return SlideTransition(
+                        position: offsetAnimation,
+                        child: child,
+                      );
+                    },
+                  ),
+                );
                 },
               ),
             ],

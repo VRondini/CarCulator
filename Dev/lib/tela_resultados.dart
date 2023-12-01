@@ -8,7 +8,7 @@ class TelaResultado extends StatelessWidget {
   final double resultado;
   final int? userId;
 
-  TelaResultado(this.resultado, {Key? key, this.userId}) : super(key: key);
+  TelaResultado(this.resultado, {Key? key, required this.userId}) : super(key: key);
 
   @override
   Widget build(BuildContext TelaPrincipalContext) {
