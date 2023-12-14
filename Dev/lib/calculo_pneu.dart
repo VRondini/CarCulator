@@ -1,5 +1,5 @@
 class CalculoDesgaste {
-  late double massa, aceleracao, qualidadePneu, forcaY = 891, semanas = 20, distanciaPercorrida, desgasteMaximo;
+  late double massa, aceleracao, qualidadePneu, forcaY = 891, semanas = 1, distanciaPercorrida, desgasteMaximo;
 
   double calculaForcaHorizontal() {
     _checkInitialization();
