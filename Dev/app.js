@@ -19,7 +19,7 @@ const client = new Client({
   user: 'postgres',
   host: 'localhost',
   database: 'login_carculator',
-  password: 'Gatoumdois10',
+  password: 'xxxxxxxx',
   port: 5432,
 });
 
